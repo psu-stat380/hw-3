@@ -1,11 +1,11 @@
 ---
 title: "Homework 3"
-author: "[Insert your name here]{style='background-color: yellow;'}"
+author: "[Marc Hughes]{style='background-color: yellow;'}"
 toc: true
 title-block-banner: true
 title-block-style: default
-format: html
-# format: pdf
+# format: html
+format: pdf
 ---
 
 [Link to the Github repository](https://github.com/psu-stat380/hw-3)
@@ -28,13 +28,14 @@ For this assignment, we will be using the [Wine Quality](https://archive.ics.uci
 
 We will be using the following libraries:
 
-```R
+```{R}
 library(readr)
 library(tidyr)
 library(dplyr)
 library(purrr)
 library(car)
 library(glmnet)
+library(corrplot)
 ```
 
 <br><br><br><br>
@@ -50,14 +51,14 @@ Regression with categorical covariate and $t$-Test
 
 Read the wine quality datasets from the specified URLs and store them in data frames `df1` and `df2`.
 
-```R
+```{R}
 url1 <- "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"
 
 url2 <- "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
 
 
-df1 <- ... # Insert your code here
-df2 <- ... # Insert your code here
+df1 <- read.csv(url1, sep = ';')
+df2 <- read.csv(url2, sep = ';')
 ```
 
 ---
@@ -73,8 +74,28 @@ Perform the following tasks to prepare the data frame `df` for analysis:
 1. Remove rows (if any) with missing values.
 
 
-```R
-df <- ... # Insert your code here
+```{R}
+# adding new column to both data frames that will distinguish the two types of wine when bound together
+df1$type = "white"
+df2$type = "red"
+
+# binding both data frames
+df <- rbind(df1, df2) 
+
+# replacing the periods with and underscore
+colnames(df) <- gsub('\\.', '_', colnames(df))
+
+# removing columns 'fixed_acidity' and 'free_sulfur_dioxide' from the data frame
+df <- df %>%
+  select(!fixed_acidity & !free_sulfur_dioxide)
+
+# changing the 'type' column to a factor
+df$type <- factor(df$type)
+
+# dropping any missing values
+df <- df %>%
+  drop_na()
+
 ```
 
 
@@ -98,10 +119,32 @@ Recall from STAT 200, the method to compute the $t$ statistic for the the differ
 3. Using `sp_squared` and `diff_mean`, compute the $t$ Statistic, and store its value in a variable called `t1`.
 
 
-```R
-diff_mean <- ... # Insert your code here
-sp <-  ... # Insert your code here
-t1 <-  ... # Insert your code here
+```{R}
+# creating temporary df to calculate mean
+temp_df <-
+  df %>%
+  group_by(type) %>%
+  summarise("quality_mean" = mean(quality))
+
+# calculating mean
+diff_mean <- abs(temp_df$quality_mean[temp_df$type == "white"] - temp_df$quality_mean[temp_df$type == "red"])
+
+# finding lengths
+n1 <- length(df$quality[df$type == "white"])
+n2 <- length(df$quality[df$type == "red"])
+
+var1 <- var(df$quality[df$type == "white"])
+var2 <- var(df$quality[df$type == "red"])
+
+# manually calculating sp_squared
+sp_squared <- ((n1-1)*var1 + (n2-1)*var2) / (n1+n2-2)
+
+# calculating standard deviation
+sd1 <- sd(df$quality[df$type == "white"])
+sd2 <- sd(df$quality[df$type == "red"])
+
+# calculating the t-statistic
+t1 <-  diff_mean / sqrt(sp_squared*(1/n1 + 1/n2))
 ```
 
 
@@ -113,9 +156,10 @@ Equivalently, R has a function called `t.test()` which enables you to perform a 
 
 Perform a two-sample t-test to compare the quality of white and red wines using the `t.test()` function with the setting `var.equal=TRUE`. Store the t-statistic in `t2`.
 
-```R
-t_test <- t.test(...) # Insert your code here
-t2 <- ... # Insert your code here
+```{R}
+# using 't.test()' function to calculate the t-statistic
+t_test <- t.test(df$quality[df$type == "white"], df$quality[df$type == "red"], var.equal = TRUE)
+t2 <- t_test$statistic
 ```
 
 ---
@@ -124,9 +168,9 @@ t2 <- ... # Insert your code here
 
 Fit a linear regression model to predict `quality` from `type` using the `lm()` function, and extract the $t$-statistic for the `type` coefficient from the model summary. Store this $t$-statistic in `t3`.
 
-```R
-fit <- lm(...) # Insert your here
-t3 <- ... # Insert your here
+```{R}
+fit <- lm(quality ~ type, data = df)
+t3 <- summary(fit)$coefficients[2, "t value"]
 ```
 
 
@@ -136,11 +180,10 @@ t3 <- ... # Insert your here
 
 Print a vector containing the values of `t1`, `t2`, and `t3`. What can you conclude from this? Why?
 
-```R
-c(t1, t2, t3) # Insert your code here
+```{R}
+c(t1, t2, t3)
 ```
-
-
+You can conclude that all three of the methods are valid ways of extracting the t-statistic due to all t values being the exact same regardless of the method. In addition, this shows that the t-statistic is significant which allows us to reject the null hypothesis.
 
 
 <br><br><br><br>
@@ -161,10 +204,12 @@ Collinearity
 Fit a linear regression model with all predictors against the response variable `quality`. Use the `broom::tidy()` function to print a summary of the fitted model. What can we conclude from the model summary?
 
 
-```R
-... # Insert your code here
+```{R}
+fit_all <- lm(quality ~ ., data = df)
+broom::tidy(summary(fit_all))
 ```
 
+We can conclude that all of the p-values are significant which means we reject the null hypothesis and accept the alternative. In addition, the summary shows, evident by the "statistic" column, that only a select few of the t values are statistically significant.
 
 ---
 
@@ -173,14 +218,17 @@ Fit a linear regression model with all predictors against the response variable 
 Fit two **simple** linear regression models using `lm()`: one with only `citric_acid` as the predictor, and another with only `total_sulfur_dioxide` as the predictor. In both models, use `quality` as the response variable. How does your model summary compare to the summary from the previous question?
 
 
-```R
-model_citric <- ... # Insert your code here
+```{R}
+model_citric <- lm(quality ~ citric_acid, data = df)
+summary(model_citric)
 ```
 
-```R
-model_sulfur <- ... # Insert your code here
+```{R}
+model_sulfur <- lm(quality ~ total_sulfur_dioxide, data = df)
+summary(model_sulfur)
 ```
 
+The t value of the "citric_acid" predictor under the model_citric model shows a large increase to the t value shown in the model with all predictors. The increase was so much so that "citric_acid" actually has a significant t value in "model_critic". On the other hand, the t value of the "total_sulfur_dioxide" predictor is even smaller and remains insignificant.
 
 ---
 
@@ -188,8 +236,16 @@ model_sulfur <- ... # Insert your code here
 
 Visualize the correlation matrix of all numeric columns in `df` using `corrplot()`
 
-```R
-df %>% ... # Insert your code here
+```{R}
+# creating data frame with only numeric columns
+df_numeric <- df %>% 
+  keep(is.numeric)
+
+# creating correlation matrix
+cor_mat <- cor(df_numeric)
+# visualizing the correlation matrix
+corrplot(cor_mat, type = 'upper')
+
 ```
 
 
@@ -201,10 +257,11 @@ df %>% ... # Insert your code here
 Compute the variance inflation factor (VIF) for each predictor in the full model using `vif()` function. What can we conclude from this?
 
 
-```R
-... # Insert your code here
+```{R}
+vif(fit_all)
 ```
 
+We can conclude that predictors like; 'volatile_acidity', 'residual_sugar', 'total_sulfur_dioxide', 'density', 'alcohol', and 'type' all of relatively high variance inflation factors. Having a high variance inflation means that the predictors listed are highly correlated with other variables in the model. This means that values like the t-statistic and p-value vastly different for variables with a high VIF depending on the inclusion of other highly correlated variables within the model.
 
 
 <br><br><br><br>
