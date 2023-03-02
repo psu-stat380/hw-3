@@ -205,8 +205,8 @@ Fit a linear regression model with all predictors against the response variable 
 
 
 ```{R}
-fit_all <- lm(quality ~ ., data = df)
-broom::tidy(summary(fit_all))
+full_model <- lm(quality ~ ., data = df)
+broom::tidy(summary(full_model))
 ```
 
 We can conclude that all of the p-values are significant which means we reject the null hypothesis and accept the alternative. In addition, the summary shows, evident by the "statistic" column, that only a select few of the t values are statistically significant.
@@ -258,7 +258,7 @@ Compute the variance inflation factor (VIF) for each predictor in the full model
 
 
 ```{R}
-vif(fit_all)
+vif(full_model)
 ```
 
 We can conclude that predictors like; 'volatile_acidity', 'residual_sugar', 'total_sulfur_dioxide', 'density', 'alcohol', and 'type' all of relatively high variance inflation factors. Having a high variance inflation means that the predictors listed are highly correlated with other variables in the model. This means that values like the t-statistic and p-value vastly different for variables with a high VIF depending on the inclusion of other highly correlated variables within the model.
@@ -282,8 +282,10 @@ Variable selection
 
 Run a backward stepwise regression using a `full_model` object as the starting model. Store the final formula in an object called `backward_formula` using the built-in `formula()` function in R
 
-```R
-... # Insert your code here
+```{R}
+full_model <- lm(quality ~ ., data = df)
+
+backward_model <- step(full_model, direction = "backward", scope=formula(full_model))
 ```
 
 ---
@@ -292,8 +294,10 @@ Run a backward stepwise regression using a `full_model` object as the starting m
 
 Run a forward stepwise regression using a `null_model` object as the starting model. Store the final formula in an object called `forward_formula` using the built-in `formula()` function in R
 
-```R
-... # Insert your code here
+```{R}
+null_model <- lm(quality ~ 1, data = df)
+
+forward_model <- step(null_model, direction = "forward", scope = formula(full_model))
 ```
 
 
@@ -308,16 +312,44 @@ Run a forward stepwise regression using a `null_model` object as the starting mo
 
 3. Then, use the `cv.glmnet()` function to perform LASSO and Ridge regression with `X` and `y`.
 
-```R
-... # Insert your code here. 
+```{R}
+
+y <- df$quality
+
+make_model_matrix <- function(formula) {
+  X <- model.matrix(full_model, df)[, -1]
+  cnames <- colnames(X)
+  for(i in 1:ncol(X)) {
+    if(!cnames[i] == "typewhite") {
+      X[, i] <- scale(X[, i])
+    } else {
+      colnames(X)[i] <- "type"
+    }
+  }
+  return(X)
+}
+
+lassoReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 1)
+lassoReg
+
+ridgeReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 0)
+ridgeReg
+
 ```
 
 Create side-by-side plots of the ridge and LASSO regression results. Interpret your main findings. 
 
-```R
+```{R}
 par(mfrow=c(1, 2))
-... # Insert your code here. 
+
+plot(lassoReg)
+title("Lasso Plot", line = .3)
+
+plot(ridgeReg)
+title("Ridge Plot", line = .3)
 ```
+
+The LASSO plot suggests a lambda of approximately -3.5 being optimal for the minimization of mean-squared error. According to the plot, this model has 4 variables. The ridge plot, on the other hand, uses a lambda of approximately -2 to minimize mean-squared error and includes all variables because ridge regression does not do variable selection.
 
 ---
 
@@ -327,6 +359,16 @@ Print the coefficient values for LASSO regression at the `lambda.1se` value? Wha
 
 Store the variable names with non-zero coefficients in `lasso_vars`, and create a formula object called `lasso_formula` using the `make_formula()` function provided in the Appendix. 
 
+```{R}
+lasso_coef <- coef(lassoReg, s = "lambda.1se")
+lasso_coef
+
+lasso_vars <- rownames(lasso_coef)[which(abs(lasso_coef) > 0)][-1] # exclude the intercept term
+lasso_vars
+
+```
+
+The variables selected are "volatile_acidity", "residual_sugar", "sulphates", and "alcohol". 
 
 ---
 
@@ -345,6 +387,11 @@ Store the variable names with non-zero coefficients in `ridge_vars`, and create 
 What is the difference between stepwise selection, LASSO and ridge based on you analyses above?
 
 
+LASSO regression best for data frames with a very large amount of columns. LASS regression uses mean-squared error to do variable selection.
+
+Ridge regression does not do variable selection.
+
+Stepwise selection uses 'AIC' to do variable selection.
 
 
 
