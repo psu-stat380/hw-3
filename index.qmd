@@ -36,6 +36,7 @@ library(purrr)
 library(car)
 library(glmnet)
 library(corrplot)
+library(broom)
 ```
 
 <br><br><br><br>
@@ -183,6 +184,7 @@ Print a vector containing the values of `t1`, `t2`, and `t3`. What can you concl
 ```{R}
 c(t1, t2, t3)
 ```
+
 You can conclude that all three of the methods are valid ways of extracting the t-statistic due to all t values being the exact same regardless of the method. In addition, this shows that the t-statistic is significant which allows us to reject the null hypothesis.
 
 
@@ -285,7 +287,7 @@ Run a backward stepwise regression using a `full_model` object as the starting m
 ```{R}
 full_model <- lm(quality ~ ., data = df)
 
-backward_model <- step(full_model, direction = "backward", scope=formula(full_model))
+backward_formula <- step(full_model, direction = "backward", scope=formula(full_model))
 ```
 
 ---
@@ -297,7 +299,7 @@ Run a forward stepwise regression using a `null_model` object as the starting mo
 ```{R}
 null_model <- lm(quality ~ 1, data = df)
 
-forward_model <- step(null_model, direction = "forward", scope = formula(full_model))
+forward_formula <- step(null_model, direction = "forward", scope = formula(full_model))
 ```
 
 
@@ -313,14 +315,14 @@ forward_model <- step(null_model, direction = "forward", scope = formula(full_mo
 3. Then, use the `cv.glmnet()` function to perform LASSO and Ridge regression with `X` and `y`.
 
 ```{R}
-
+# creating y vector
 y <- df$quality
-
-make_model_matrix <- function(formula) {
-  X <- model.matrix(full_model, df)[, -1]
+# creating a design matrix
+make_model_matrix <- function(formula){
+  X <- model.matrix(formula, df)[, -1]
   cnames <- colnames(X)
-  for(i in 1:ncol(X)) {
-    if(!cnames[i] == "typewhite") {
+  for(i in 1:ncol(X)){
+    if(!cnames[i] == "typewhite"){
       X[, i] <- scale(X[, i])
     } else {
       colnames(X)[i] <- "type"
@@ -328,10 +330,10 @@ make_model_matrix <- function(formula) {
   }
   return(X)
 }
-
+# performing lasso regression
 lassoReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 1)
 lassoReg
-
+# performing ridge regression
 ridgeReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 0)
 ridgeReg
 
@@ -349,7 +351,7 @@ plot(ridgeReg)
 title("Ridge Plot", line = .3)
 ```
 
-The LASSO plot suggests a lambda of approximately -3.5 being optimal for the minimization of mean-squared error. According to the plot, this model has 4 variables. The ridge plot, on the other hand, uses a lambda of approximately -2 to minimize mean-squared error and includes all variables because ridge regression does not do variable selection.
+The LASSO plot suggests the lambda that is most optimal for the minimization of mean-squared error. According to the plot, this model has 4 variables. The ridge plot, on the other hand, uses a lambda of approximately -2 to minimize mean-squared error and includes all variables because ridge regression does not do variable selection.
 
 ---
 
@@ -366,6 +368,14 @@ lasso_coef
 lasso_vars <- rownames(lasso_coef)[which(abs(lasso_coef) > 0)][-1] # exclude the intercept term
 lasso_vars
 
+make_formula <- function(x){
+  as.formula(
+    paste("quality ~ ", paste(x, collapse = " + "))
+  )
+}
+
+lasso_formula <- make_formula(lasso_vars)
+
 ```
 
 The variables selected are "volatile_acidity", "residual_sugar", "sulphates", and "alcohol". 
@@ -378,7 +388,24 @@ Print the coefficient values for ridge regression at the `lambda.1se` value? Wha
 
 Store the variable names with non-zero coefficients in `ridge_vars`, and create a formula object called `ridge_formula` using the `make_formula()` function provided in the Appendix. 
 
+```{R}
+ridge_coef <- coef(ridgeReg, s = "lambda.1se")
+ridge_coef
 
+ridge_vars <- rownames(ridge_coef)[which(abs(ridge_coef) > 0)][-1] # exclude the intercept term
+ridge_vars
+
+make_formula <- function(x){
+  as.formula(
+    paste("quality ~ ", paste(x, collapse = " + "))
+  )
+}
+
+ridge_formula <- make_formula(ridge_vars)
+
+```
+
+All the variables are selected; "volatile_acidity", "citric_acid", "residual_sugar", "chlorides", "total_sulfur_dioxide", "density", "pH", "sulphates", "alcohol", and "type".
 
 ---
 
@@ -387,11 +414,7 @@ Store the variable names with non-zero coefficients in `ridge_vars`, and create 
 What is the difference between stepwise selection, LASSO and ridge based on you analyses above?
 
 
-LASSO regression best for data frames with a very large amount of columns. LASS regression uses mean-squared error to do variable selection.
-
-Ridge regression does not do variable selection.
-
-Stepwise selection uses 'AIC' to do variable selection.
+Stepwise selection uses 'AIC' to do variable selection and seems to retain more variables than LASSO regression. On the other hand, LASSO regression uses mean-squared error to do variable selection. Finally, ridge regression does not do variable selection whatsoever.
 
 
 
@@ -414,6 +437,8 @@ Variable selection
 
 Excluding `quality` from `df` we have $10$ possible predictors as the covariates. How many different models can we create using any subset of these $10$ coavriates as possible predictors? Justify your answer. 
 
+We can create 2^10 different models, so 1024 different models. This is because order doesn't matter and you can either include a predictor or exclude a predictor.
+
 ---
 
 
@@ -421,7 +446,8 @@ Excluding `quality` from `df` we have $10$ possible predictors as the covariates
 
 Store the names of the predictor variables (all columns except `quality`) in an object called `x_vars`.
 
-```R
+```{R}
+# storing predictor variables
 x_vars <- colnames(df %>% select(-quality))
 ```
 
@@ -432,19 +458,19 @@ Use:
 
 to **generate all possible linear regression formulas** using the variables in `x_vars`. This is most optimally achieved using the `map()` function from the `purrr` package.
 
-```R
+```{R}
 formulas <- map(
   1:length(x_vars),
-  \(x){
-    vars <- combn(...) # Insert code here
-    map(vars, ...) # Insert code here
+  function(x){
+    vars <- combn(x_vars, x, simplify = FALSE)
+    map(vars, make_formula) 
   }
 ) %>% unlist()
 ```
 
 If your code is right the following command should return something along the lines of:
 
-```R
+```{R}
 sample(formulas, 4) %>% as.character()
 # Output:
 # [1] "quality ~ volatile_acidity + residual_sugar + density + pH + alcohol"                                                 
@@ -458,9 +484,11 @@ sample(formulas, 4) %>% as.character()
 ###### 4.3  (10 points)
 Use `map()` and `lm()` to fit a linear regression model to each formula in `formulas`, using `df` as the data source. Use `broom::glance()` to extract the model summary statistics, and bind them together into a single tibble of summaries using the `bind_rows()` function from `dplyr`.
 
-```R
-models <- map(formulas, ...) # Insert your code here
-summaries <- map(models, ...) # Insert your code here
+```{R}
+models <- map(formulas, ~ lm(formula = .x, data = df))
+summaries <- bind_rows(map(models, broom::glance)) 
+
+summaries
 ```
 
 
@@ -472,14 +500,15 @@ summaries <- map(models, ...) # Insert your code here
 
 Extract the `adj.r.squared` values from `summaries` and use them to identify the formula with the _**highest**_ adjusted R-squared value.
 
-```R
-... # Insert your code here
+```{R}
+extraction1 <- summaries$adj.r.squared
+
 ```
 
 Store resulting formula as a variable called `rsq_formula`.
 
-```R
-rsq_formula <- ... # Insert your code
+```{R}
+rsq_formula <- formulas[which.max(extraction1)]
 ```
 
 ---
@@ -489,15 +518,15 @@ rsq_formula <- ... # Insert your code
 Extract the `AIC` values from `summaries` and use them to identify the formula with the **_lowest_** AIC value.
 
 
-```R
-... # Insert your code here
+```{R}
+extraction2 <- summaries$AIC
 ```
 
 Store resulting formula as a variable called `aic_formula`.
 
 
-```R
-aic_formula <- ... # Insert your code
+```{R}
+aic_formula <- formulas[which.min(extraction2)]
 ```
 
 ---
@@ -506,7 +535,7 @@ aic_formula <- ... # Insert your code
 
 Combine all formulas shortlisted into a single vector called `final_formulas`.
 
-```R
+```{R}
 null_formula <- formula(null_model)
 full_formula <- formula(full_model)
 
@@ -524,9 +553,15 @@ final_formulas <- c(
 
 * Are `aic_formula` and `rsq_formula` the same? How do they differ from the formulas shortlisted in question 3?
 
+The 'aic_formula' and 'rsq_formula' are not the same and they differ from the some of the other formulas in the way in which they were found and what they represent. For example, 'rsq_formula' was found by simply extracting the formula with the highest adjusted r-squared from the model summaries and matches no other formulas shortlisted. 'aic_formula', on the other hand, actually matches both the 'backward_formula' and the 'forward_formula'. This is because the 'aic_formula' was found by finding the formula with the lowest AIC which is exactly what backward and forward selection achieves.
+
 * Which of these is more reliable? Why? 
 
+The 'aic_formula' is more reliable than 'rsq_formula' because it uses an already tried and tested way of finding an optimal model which is choosing a model that minimizes AIC.
+
 * If we had a dataset with $10,000$ columns, which of these methods would you consider for your analyses? Why?
+
+If we had a dataset with $10,000$ columns I would choose to use LASSO regression because they can handle high-dimensional datasets LASSO engages in feature selection so it can reduce the amount of parameters that would otherwise make the regression model much more computationally intensive.
 
 ---
 
@@ -535,10 +570,15 @@ final_formulas <- c(
 
 Use `map()` and `glance()` to extract the `sigma, adj.r.squared, AIC, df`, and `p.value` statistics for each model obtained from `final_formulas`. Bind them together into a single data frame `summary_table`. Summarize your main findings.
 
-```R
+```{R}
 summary_table <- map(
   final_formulas, 
-  \(x) ... # Insert your code here
+  function(x) {
+    model <- lm(x, data = df)
+    glance(model) %>%
+      select(sigma, adj.r.squared, AIC, df, p.value) %>%
+      mutate(formula = as.character(x))
+  }
 ) %>% bind_rows()
 
 summary_table %>% knitr::kable()
