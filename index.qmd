@@ -1,11 +1,10 @@
 ---
 title: "Homework 3"
-author: "[Insert your name here]{style='background-color: yellow;'}"
+author: "[Huanzhang Xia]{style='background-color: yellow;'}"
 toc: true
 title-block-banner: true
 title-block-style: default
-format: html
-# format: pdf
+format: pdf
 ---
 
 [Link to the Github repository](https://github.com/psu-stat380/hw-3)
@@ -28,17 +27,61 @@ For this assignment, we will be using the [Wine Quality](https://archive.ics.uci
 
 We will be using the following libraries:
 
-```R
+```{R}
+rm(list=ls())
 library(readr)
 library(tidyr)
 library(dplyr)
 library(purrr)
 library(car)
 library(glmnet)
+library(corrplot)
+library(janitor)
 ```
 
 <br><br><br><br>
 ---
+
+# Appendix
+
+
+#### Convenience function for creating a formula object
+
+The following function which takes as input a vector of column names `x` and outputs a `formula` object with `quality` as the response variable and the columns of `x` as the covariates. 
+
+```{R}
+make_formula <- function(x){
+  as.formula(
+    paste("quality ~ ", paste(x, collapse = " + "))
+  )
+}
+
+# For example the following code will
+# result in a formula object
+# "quality ~ a + b + c"
+make_formula(c("a", "b", "c"))
+```
+
+#### Convenience function for `glmnet`
+
+The `make_model_matrix` function below takes a `formula` as input and outputs a **rescaled** model matrix `X` in a format amenable for `glmnet()`
+
+```{R}
+make_model_matrix <- function(formula){
+  X <- model.matrix(formula, df)[, -1]
+  cnames <- colnames(X)
+  for(i in 1:ncol(X)){
+    if(!cnames[i] == "typewhite"){
+      X[, i] <- scale(X[, i])
+    } else {
+      colnames(X)[i] <- "type"
+    }
+  }
+  return(X)
+}
+```
+
+
 
 ## Question 1
 ::: {.callout-tip}
@@ -50,14 +93,15 @@ Regression with categorical covariate and $t$-Test
 
 Read the wine quality datasets from the specified URLs and store them in data frames `df1` and `df2`.
 
-```R
+```{R}
 url1 <- "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"
-
 url2 <- "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
-
-
-df1 <- ... # Insert your code here
-df2 <- ... # Insert your code here
+df1 <- read.table(url1,sep=";") # Insert your code here
+df1 <- df1 %>%
+  row_to_names(row_number = 1)
+df2 <- read.table(url2,sep=";") # Insert your code here
+df2 <- df2 %>%
+  row_to_names(row_number = 1)
 ```
 
 ---
@@ -73,8 +117,19 @@ Perform the following tasks to prepare the data frame `df` for analysis:
 1. Remove rows (if any) with missing values.
 
 
-```R
-df <- ... # Insert your code here
+```{R}
+red = "red"
+white = "white"
+df1$type <- white
+df2$type <- red
+df <- rbind(df1,df2) # Insert your code here
+names(df) <- gsub(" ", "_", names(df))
+df <- df %>%
+  select(!c(fixed_acidity,free_sulfur_dioxide))
+invisible(as.factor(df$type))
+df <- df%>%
+  drop_na()
+dim(df)
 ```
 
 
@@ -98,10 +153,20 @@ Recall from STAT 200, the method to compute the $t$ statistic for the the differ
 3. Using `sp_squared` and `diff_mean`, compute the $t$ Statistic, and store its value in a variable called `t1`.
 
 
-```R
-diff_mean <- ... # Insert your code here
-sp <-  ... # Insert your code here
-t1 <-  ... # Insert your code here
+```{R}
+#1
+df$quality <- as.numeric(df$quality)
+df13 <- aggregate(x= df$quality,by = list(df$type),FUN = mean)
+diff_mean <- df13[2,2]-df13[1,2]
+#2
+n1 <- nrow(df[df$type=="white",])
+n2 <- nrow(df[df$type=="red",])
+var1 <- var(df$quality[df$type=="white"])
+var2 <- var(df$quality[df$type=="red"])
+sp_squared <- ((n1-1)*var1 + (n2-1)*var2) / (n1+n2-2)
+#3
+t1 <- (diff_mean-0)/(sqrt(sp_squared)*sqrt((1/n1)+(1/n2)))
+t1
 ```
 
 
@@ -113,9 +178,15 @@ Equivalently, R has a function called `t.test()` which enables you to perform a 
 
 Perform a two-sample t-test to compare the quality of white and red wines using the `t.test()` function with the setting `var.equal=TRUE`. Store the t-statistic in `t2`.
 
-```R
-t_test <- t.test(...) # Insert your code here
-t2 <- ... # Insert your code here
+```{R}
+df14white <- df %>%
+  filter(type == "white") %>%
+  pull(quality)
+df14red <- df %>%
+  filter(type == "red") %>%
+  pull(quality)
+t_test <- t.test(df14white, df14red,var.equal=TRUE)
+t2 <- t_test$statistic
 ```
 
 ---
@@ -124,9 +195,9 @@ t2 <- ... # Insert your code here
 
 Fit a linear regression model to predict `quality` from `type` using the `lm()` function, and extract the $t$-statistic for the `type` coefficient from the model summary. Store this $t$-statistic in `t3`.
 
-```R
-fit <- lm(...) # Insert your here
-t3 <- ... # Insert your here
+```{R}
+fit <- lm(df$quality~df$type)
+t3 <- tail(coef(summary(fit))[, "t value"],1)
 ```
 
 
@@ -136,8 +207,11 @@ t3 <- ... # Insert your here
 
 Print a vector containing the values of `t1`, `t2`, and `t3`. What can you conclude from this? Why?
 
-```R
-c(t1, t2, t3) # Insert your code here
+Calculating t statistic by all mesures should yield same result. Because all three methods are using the same function in the background.
+
+```{R}
+vector<-c(t1, t2, t3) # Insert your code here
+print(vector)
 ```
 
 
@@ -160,9 +234,27 @@ Collinearity
 
 Fit a linear regression model with all predictors against the response variable `quality`. Use the `broom::tidy()` function to print a summary of the fitted model. What can we conclude from the model summary?
 
+We can conclude that variables volatile_acidity,residual_sugar,chlorides,density,ph,sulphates,alcohol,quality are significant, while the others are not. Total_sulfur_dioxide and citric_acid are not good predictors of the quality, given all other variables are accounted for.
 
-```R
-... # Insert your code here
+```{R}
+df$volatile_acidity <- as.numeric(df$volatile_acidity)
+df$citric_acid <- as.numeric(df$citric_acid)
+df$residual_sugar <- as.numeric(df$residual_sugar)
+df$chlorides <- as.numeric(df$chlorides)
+df$total_sulfur_dioxide <- as.numeric(df$total_sulfur_dioxide)
+df$density <- as.numeric(df$density)
+df$pH <- as.numeric(df$pH)
+df$sulphates <- as.numeric(df$sulphates)
+df$alcohol <- as.numeric(df$alcohol)
+df$quality <- as.numeric(df$quality)
+df$type <- as.factor(df$type)
+sapply(df, class)
+```
+
+
+```{R}
+full_model <- lm(quality~.,df)
+broom::tidy(full_model)
 ```
 
 
@@ -172,13 +264,16 @@ Fit a linear regression model with all predictors against the response variable 
 
 Fit two **simple** linear regression models using `lm()`: one with only `citric_acid` as the predictor, and another with only `total_sulfur_dioxide` as the predictor. In both models, use `quality` as the response variable. How does your model summary compare to the summary from the previous question?
 
+The two variables alone are significant predictors of quality. The previous question concludes that they are not.
 
-```R
-model_citric <- ... # Insert your code here
+```{R}
+model_citric <- lm(quality~citric_acid,df)
+summary(model_citric)
 ```
 
-```R
-model_sulfur <- ... # Insert your code here
+```{R}
+model_sulfur <- lm(quality~total_sulfur_dioxide,df)
+summary(model_sulfur)
 ```
 
 
@@ -188,8 +283,12 @@ model_sulfur <- ... # Insert your code here
 
 Visualize the correlation matrix of all numeric columns in `df` using `corrplot()`
 
-```R
-df %>% ... # Insert your code here
+```{R}
+sapply(df, class)
+df23 <- df%>%
+  select(!c(type))
+dfcor = cor(df23)
+corrplot(dfcor)
 ```
 
 
@@ -200,9 +299,10 @@ df %>% ... # Insert your code here
 
 Compute the variance inflation factor (VIF) for each predictor in the full model using `vif()` function. What can we conclude from this?
 
+Most predictors have a low vif value, where as type and density has a vif value of more than 5, meaning tha they are highly correlated and multicollinearity should be considered and the variables should be dropped.
 
-```R
-... # Insert your code here
+```{R}
+vif(full_model)
 ```
 
 
@@ -225,8 +325,10 @@ Variable selection
 
 Run a backward stepwise regression using a `full_model` object as the starting model. Store the final formula in an object called `backward_formula` using the built-in `formula()` function in R
 
-```R
-... # Insert your code here
+```{R}
+backward <- step(full_model,direction='backward', scope=formula(full_model), trace=0)
+backward_formula <- formula(backward)
+backward_formula
 ```
 
 ---
@@ -235,8 +337,11 @@ Run a backward stepwise regression using a `full_model` object as the starting m
 
 Run a forward stepwise regression using a `null_model` object as the starting model. Store the final formula in an object called `forward_formula` using the built-in `formula()` function in R
 
-```R
-... # Insert your code here
+```{R}
+null_model <- lm(quality ~ 1, data=df)
+forward <- step(null_model,direction='forward', scope=formula(full_model), trace=0)
+forward_formula <- formula(forward)
+forward_formula
 ```
 
 
@@ -251,15 +356,23 @@ Run a forward stepwise regression using a `null_model` object as the starting mo
 
 3. Then, use the `cv.glmnet()` function to perform LASSO and Ridge regression with `X` and `y`.
 
-```R
-... # Insert your code here. 
+```{R}
+y <- df$quality
+X <- make_model_matrix(full_model)
+lasso <- cv.glmnet(X,y,alpha=1)
+ridge <- cv.glmnet(X,y,alpha=0)
 ```
 
 Create side-by-side plots of the ridge and LASSO regression results. Interpret your main findings. 
 
-```R
+I have found that The minimum MSE is achieved when $\lambda$=0.03879736 for ridge regression, and the minimum MSE is achieved when $\lambda$=0.0006323003 for LASSO regression.
+
+```{R}
 par(mfrow=c(1, 2))
-... # Insert your code here. 
+plot(ridge)
+plot(lasso)
+ridge$lambda.min 
+lasso$lambda.min
 ```
 
 ---
@@ -270,6 +383,13 @@ Print the coefficient values for LASSO regression at the `lambda.1se` value? Wha
 
 Store the variable names with non-zero coefficients in `lasso_vars`, and create a formula object called `lasso_formula` using the `make_formula()` function provided in the Appendix. 
 
+```{R}
+lasso$lambda.1se
+lasso_vars <- coef(lasso, s = "lambda.1se")
+lasso_vars
+lasso_formula <- make_formula(lasso_vars)
+```
+
 
 ---
 
@@ -279,7 +399,12 @@ Print the coefficient values for ridge regression at the `lambda.1se` value? Wha
 
 Store the variable names with non-zero coefficients in `ridge_vars`, and create a formula object called `ridge_formula` using the `make_formula()` function provided in the Appendix. 
 
-
+```{R}
+ridge$lambda.1se
+ridge_vars <- coef(ridge, s = "lambda.1se")
+ridge_vars
+ridge_formula <- make_formula(ridge_vars)
+```
 
 ---
 
@@ -287,10 +412,14 @@ Store the variable names with non-zero coefficients in `ridge_vars`, and create 
 
 What is the difference between stepwise selection, LASSO and ridge based on you analyses above?
 
+The stepwise regressions generated the same 8-predictor model, Lasso formula included the least terms, Ridge formula included all 8 predictors, but many of them has very small slope.
 
-
-
-
+```{R}
+summary(backward)
+summary(forward)
+lasso_formula
+ridge_formula
+```
 
 
 <br><br><br><br>
@@ -310,6 +439,13 @@ Variable selection
 
 Excluding `quality` from `df` we have $10$ possible predictors as the covariates. How many different models can we create using any subset of these $10$ coavriates as possible predictors? Justify your answer. 
 
+There could be 3628801 models. (Factorial of 10 gives the permutation of the variables, and +1 for the null model)
+
+```{R}
+factorial(10)
+```
+
+
 ---
 
 
@@ -317,7 +453,7 @@ Excluding `quality` from `df` we have $10$ possible predictors as the covariates
 
 Store the names of the predictor variables (all columns except `quality`) in an object called `x_vars`.
 
-```R
+```{R}
 x_vars <- colnames(df %>% select(-quality))
 ```
 
@@ -328,19 +464,20 @@ Use:
 
 to **generate all possible linear regression formulas** using the variables in `x_vars`. This is most optimally achieved using the `map()` function from the `purrr` package.
 
-```R
+```{R}
+length42 <-  1:length(x_vars)
 formulas <- map(
-  1:length(x_vars),
+  length42,
   \(x){
-    vars <- combn(...) # Insert code here
-    map(vars, ...) # Insert code here
+    vars <- combn(x_vars,x) # Insert code here
+    map(split(vars,rep(1:ncol(vars),each=nrow(vars))), make_formula) # Insert code here
   }
 ) %>% unlist()
 ```
 
 If your code is right the following command should return something along the lines of:
 
-```R
+```{R}
 sample(formulas, 4) %>% as.character()
 # Output:
 # [1] "quality ~ volatile_acidity + residual_sugar + density + pH + alcohol"                                                 
@@ -354,9 +491,9 @@ sample(formulas, 4) %>% as.character()
 ###### 4.3  (10 points)
 Use `map()` and `lm()` to fit a linear regression model to each formula in `formulas`, using `df` as the data source. Use `broom::glance()` to extract the model summary statistics, and bind them together into a single tibble of summaries using the `bind_rows()` function from `dplyr`.
 
-```R
-models <- map(formulas, ...) # Insert your code here
-summaries <- map(models, ...) # Insert your code here
+```{R}
+models <- map(formulas,~lm(quality~.,data=df)) # Insert your code here
+#summaries <- map(data.frame(models), bind_rows(broom::glance)) # Insert your code here
 ```
 
 
@@ -368,8 +505,9 @@ summaries <- map(models, ...) # Insert your code here
 
 Extract the `adj.r.squared` values from `summaries` and use them to identify the formula with the _**highest**_ adjusted R-squared value.
 
-```R
-... # Insert your code here
+```{R}
+#summaries%>%
+  #select(adj.r.squared)
 ```
 
 Store resulting formula as a variable called `rsq_formula`.
@@ -413,8 +551,8 @@ final_formulas <- c(
   forward_formula,
   lasso_formula, 
   ridge_formula,
-  rsq_formula,
-  aic_formula
+  #rsq_formula,
+  #aic_formula
 )
 ```
 
@@ -460,7 +598,7 @@ summary_table %>% knitr::kable()
 
 The following function which takes as input a vector of column names `x` and outputs a `formula` object with `quality` as the response variable and the columns of `x` as the covariates. 
 
-```R
+```{R}
 make_formula <- function(x){
   as.formula(
     paste("quality ~ ", paste(x, collapse = " + "))
@@ -477,7 +615,7 @@ make_formula(c("a", "b", "c"))
 
 The `make_model_matrix` function below takes a `formula` as input and outputs a **rescaled** model matrix `X` in a format amenable for `glmnet()`
 
-```R
+```{R}
 make_model_matrix <- function(formula){
   X <- model.matrix(formula, df)[, -1]
   cnames <- colnames(X)
