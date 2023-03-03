@@ -4,8 +4,7 @@ author: "[Huanzhang Xia]{style='background-color: yellow;'}"
 toc: true
 title-block-banner: true
 title-block-style: default
-format: html
-# format: pdf
+format: pdf
 ---
 
 [Link to the Github repository](https://github.com/psu-stat380/hw-3)
@@ -42,6 +41,47 @@ library(janitor)
 
 <br><br><br><br>
 ---
+
+# Appendix
+
+
+#### Convenience function for creating a formula object
+
+The following function which takes as input a vector of column names `x` and outputs a `formula` object with `quality` as the response variable and the columns of `x` as the covariates. 
+
+```{R}
+make_formula <- function(x){
+  as.formula(
+    paste("quality ~ ", paste(x, collapse = " + "))
+  )
+}
+
+# For example the following code will
+# result in a formula object
+# "quality ~ a + b + c"
+make_formula(c("a", "b", "c"))
+```
+
+#### Convenience function for `glmnet`
+
+The `make_model_matrix` function below takes a `formula` as input and outputs a **rescaled** model matrix `X` in a format amenable for `glmnet()`
+
+```{R}
+make_model_matrix <- function(formula){
+  X <- model.matrix(formula, df)[, -1]
+  cnames <- colnames(X)
+  for(i in 1:ncol(X)){
+    if(!cnames[i] == "typewhite"){
+      X[, i] <- scale(X[, i])
+    } else {
+      colnames(X)[i] <- "type"
+    }
+  }
+  return(X)
+}
+```
+
+
 
 ## Question 1
 ::: {.callout-tip}
@@ -452,8 +492,8 @@ sample(formulas, 4) %>% as.character()
 Use `map()` and `lm()` to fit a linear regression model to each formula in `formulas`, using `df` as the data source. Use `broom::glance()` to extract the model summary statistics, and bind them together into a single tibble of summaries using the `bind_rows()` function from `dplyr`.
 
 ```{R}
-models <- map(formulas,lm)) # Insert your code here
-#summaries <- map(models, ...) # Insert your code here
+models <- map(formulas,~lm(quality~.,data=df)) # Insert your code here
+#summaries <- map(data.frame(models), bind_rows(broom::glance)) # Insert your code here
 ```
 
 
@@ -465,8 +505,9 @@ models <- map(formulas,lm)) # Insert your code here
 
 Extract the `adj.r.squared` values from `summaries` and use them to identify the formula with the _**highest**_ adjusted R-squared value.
 
-```R
-... # Insert your code here
+```{R}
+#summaries%>%
+  #select(adj.r.squared)
 ```
 
 Store resulting formula as a variable called `rsq_formula`.
@@ -510,8 +551,8 @@ final_formulas <- c(
   forward_formula,
   lasso_formula, 
   ridge_formula,
-  rsq_formula,
-  aic_formula
+  #rsq_formula,
+  #aic_formula
 )
 ```
 
