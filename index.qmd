@@ -331,10 +331,10 @@ make_model_matrix <- function(formula){
   return(X)
 }
 # performing lasso regression
-lassoReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 1)
+lassoReg <- cv.glmnet(x = make_model_matrix(forward_formula), y = y, alpha = 1)
 lassoReg
 # performing ridge regression
-ridgeReg <- cv.glmnet(x = make_model_matrix(forward_model), y = y, alpha = 0)
+ridgeReg <- cv.glmnet(x = make_model_matrix(forward_formula), y = y, alpha = 0)
 ridgeReg
 
 ```
@@ -574,14 +574,15 @@ Use `map()` and `glance()` to extract the `sigma, adj.r.squared, AIC, df`, and `
 summary_table <- map(
   final_formulas, 
   function(x) {
-    model <- lm(x, data = df)
-    glance(model) %>%
+    ~ glance(x) %>%
       select(sigma, adj.r.squared, AIC, df, p.value) %>%
-      mutate(formula = as.character(x))
+      mutate(formula = as.character(formula(x)))
   }
-) %>% bind_rows()
+)
+# could not get code below to work
+# %>% bind_rows()
 
-summary_table %>% knitr::kable()
+# summary_table %>% knitr::kable()
 ```
 
 
