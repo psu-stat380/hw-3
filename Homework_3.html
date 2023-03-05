@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Insert your name here">
+
+<title>Homework 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Homework_3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Homework_3_files/libs/quarto-html/quarto.js"></script>
+<script src="Homework_3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Homework_3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Homework_3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Homework_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Homework_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Homework_3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Homework_3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Homework_3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Homework 3</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><span style="background-color: yellow;">Insert your name here</span> </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><br><br><br><br></a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><a href="https://github.com/psu-stat380/hw-3">Link to the Github repository</a></p>
+<hr>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Due: Thu, Mar 2, 2023 @ 11:59pm
+</div>
+</div>
+<div class="callout-body-container callout-body" style="font-size: 0.8em;">
+<p>Please read the instructions carefully before submitting your assignment.</p>
+<ol type="1">
+<li>This assignment requires you to only upload a <code>PDF</code> file on Canvas</li>
+<li>Don’t collapse any code cells before submitting.</li>
+<li>Remember to make sure all your code output is rendered properly before uploading your submission.</li>
+</ol>
+<p>⚠️ Please add your name to the author information in the frontmatter before submitting your assignment ⚠️</p>
+</div>
+</div>
+<p>For this assignment, we will be using the <a href="https://archive.ics.uci.edu/ml/datasets/wine+quality">Wine Quality</a> dataset from the UCI Machine Learning Repository. The dataset consists of red and white <em>vinho verde</em> wine samples, from the north of Portugal. The goal is to model wine quality based on physicochemical tests</p>
+<p>We will be using the following libraries:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'glmnet' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'Matrix' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded glmnet 4.1-4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(car)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"><br><br><br><br></h2>
+</section>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+50 points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Regression with categorical covariate and <span class="math inline">\(t\)</span>-Test</p>
+</div>
+</div>
+<section id="points-1" class="level6">
+<h6 class="anchored" data-anchor-id="points-1">1.1 (5 points)</h6>
+<p>Read the wine quality datasets from the specified URLs and store them in data frames <code>df1</code> and <code>df2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">"https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>url2 <span class="ot">&lt;-</span> <span class="st">"https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url1, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url2, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="points-2" class="level6">
+<h6 class="anchored" data-anchor-id="points-2">1.2 (5 points)</h6>
+<p>Perform the following tasks to prepare the data frame <code>df</code> for analysis:</p>
+<ol type="1">
+<li>Combine the two data frames into a single data frame <code>df</code>, adding a new column called <code>type</code> to indicate whether each row corresponds to white or red wine.</li>
+<li>Rename the columns of <code>df</code> to replace spaces with underscores</li>
+<li>Remove the columns <code>fixed_acidity</code> and <code>free_sulfur_dioxide</code></li>
+<li>Convert the <code>type</code> column to a factor</li>
+<li>Remove rows (if any) with missing values.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"red"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"white"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df1, df2)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">colnames</span>(df))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[, <span class="sc">!</span>(<span class="fu">colnames</span>(df) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"fixed.acidity"</span>, <span class="st">"free.sulfur.dioxide"</span>))]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>type)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6497   11</code></pre>
+</div>
+</div>
+<p>Your output to <code>R dim(df)</code> should be</p>
+<pre><code>[1] 6497   11</code></pre>
+<hr>
+</section>
+<section id="points-3" class="level6">
+<h6 class="anchored" data-anchor-id="points-3">1.3 (20 points)</h6>
+<p>Recall from STAT 200, the method to compute the <span class="math inline">\(t\)</span> statistic for the the difference in means (with the equal variance assumption)</p>
+<ol type="1">
+<li><p>Using <code>df</code> compute the mean of <code>quality</code> for red and white wine separately, and then store the difference in means as a variable called <code>diff_mean</code>.</p></li>
+<li><p>Compute the pooled sample variance and store the value as a variable called <code>sp_squared</code>.</p></li>
+<li><p>Using <code>sp_squared</code> and <code>diff_mean</code>, compute the <span class="math inline">\(t\)</span> Statistic, and store its value in a variable called <code>t1</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mean_white <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"white"</span>])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mean_red <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"red"</span>])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>diff_mean <span class="ot">&lt;-</span> mean_white <span class="sc">-</span> mean_red</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>n_white <span class="ot">&lt;-</span> <span class="fu">length</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"white"</span>])</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>n_red <span class="ot">&lt;-</span> <span class="fu">length</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"red"</span>])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>var_white <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"white"</span>])</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>var_red <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>quality[df<span class="sc">$</span>type <span class="sc">==</span> <span class="st">"red"</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>sp_squared <span class="ot">&lt;-</span> ((n_white <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var_white <span class="sc">+</span> (n_red <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var_red) <span class="sc">/</span> (n_white <span class="sc">+</span> n_red <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sp_squared <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> n_white <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> n_red))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> diff_mean <span class="sc">/</span> se</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -9.68565</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-4" class="level6">
+<h6 class="anchored" data-anchor-id="points-4">1.4 (10 points)</h6>
+<p>Equivalently, R has a function called <code>t.test()</code> which enables you to perform a two-sample <span class="math inline">\(t\)</span>-Test without having to compute the pooled variance and difference in means.</p>
+<p>Perform a two-sample t-test to compare the quality of white and red wines using the <code>t.test()</code> function with the setting <code>var.equal=TRUE</code>. Store the t-statistic in <code>t2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(quality <span class="sc">~</span> type, <span class="at">data =</span> df, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> t_test<span class="sc">$</span>statistic</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>t2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      t 
+9.68565 </code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-5" class="level6">
+<h6 class="anchored" data-anchor-id="points-5">1.5 (5 points)</h6>
+<p>Fit a linear regression model to predict <code>quality</code> from <code>type</code> using the <code>lm()</code> function, and extract the <span class="math inline">\(t\)</span>-statistic for the <code>type</code> coefficient from the model summary. Store this <span class="math inline">\(t\)</span>-statistic in <code>t3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> type, <span class="at">data =</span> df)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>t3 <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="st">"t value"</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>t3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -9.68565</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-6" class="level6">
+<h6 class="anchored" data-anchor-id="points-6">1.6 (5 points)</h6>
+<p>Print a vector containing the values of <code>t1</code>, <code>t2</code>, and <code>t3</code>. What can you conclude from this? Why?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(t1, t2, t3) <span class="co"># Insert your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                t          
+-9.68565  9.68565 -9.68565 </code></pre>
+</div>
+</div>
+<p><br><br><br><br> <br><br><br><br> —</p>
+</section>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+25 points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Collinearity</p>
+</div>
+</div>
+<hr>
+<section id="points-8" class="level6">
+<h6 class="anchored" data-anchor-id="points-8">2.1 (5 points)</h6>
+<p>Fit a linear regression model with all predictors against the response variable <code>quality</code>. Use the <code>broom::tidy()</code> function to print a summary of the fitted model. What can we conclude from the model summary?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fit_all <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> ., <span class="at">data =</span> df)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(fit_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 x 5
+   term                   estimate std.error statistic  p.value
+   &lt;chr&gt;                     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 (Intercept)           57.1       9.30         6.15  8.38e-10
+ 2 volatile.acidity      -1.61      0.0806     -20.0   4.07e-86
+ 3 citric.acid            0.0272    0.0783       0.347 7.28e- 1
+ 4 residual.sugar         0.0451    0.00416     10.8   3.64e-27
+ 5 chlorides             -0.964     0.333       -2.90  3.78e- 3
+ 6 total.sulfur.dioxide  -0.000329  0.000262    -1.25  2.10e- 1
+ 7 density              -55.2       9.32        -5.92  3.34e- 9
+ 8 pH                     0.188     0.0661       2.85  4.38e- 3
+ 9 sulphates              0.662     0.0758       8.73  3.21e-18
+10 alcohol                0.277     0.0142      19.5   1.87e-82
+11 typewhite              0.386     0.0549       7.02  2.39e-12</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-9" class="level6">
+<h6 class="anchored" data-anchor-id="points-9">2.2 (10 points)</h6>
+<p>Fit two <strong>simple</strong> linear regression models using <code>lm()</code>: one with only <code>citric_acid</code> as the predictor, and another with only <code>total_sulfur_dioxide</code> as the predictor. In both models, use <code>quality</code> as the response variable. How does your model summary compare to the summary from the previous question?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model_citric <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> citric.acid, <span class="at">data =</span> df)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_citric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = quality ~ citric.acid, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9938 -0.7831  0.1552  0.2426  3.1963 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  5.65461    0.02602 217.343   &lt;2e-16 ***
+citric.acid  0.51398    0.07429   6.918    5e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8701 on 6495 degrees of freedom
+Multiple R-squared:  0.007316,  Adjusted R-squared:  0.007163 
+F-statistic: 47.87 on 1 and 6495 DF,  p-value: 5.002e-12</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model_sulfur <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> total.sulfur.dioxide, <span class="at">data =</span> df)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_sulfur)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = quality ~ total.sulfur.dioxide, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8866 -0.7971  0.1658  0.2227  3.1965 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           5.8923848  0.0246717 238.831  &lt; 2e-16 ***
+total.sulfur.dioxide -0.0006394  0.0001915  -3.338 0.000848 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8726 on 6495 degrees of freedom
+Multiple R-squared:  0.001713,  Adjusted R-squared:  0.001559 
+F-statistic: 11.14 on 1 and 6495 DF,  p-value: 0.000848</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-10" class="level6">
+<h6 class="anchored" data-anchor-id="points-10">2.3 (5 points)</h6>
+<p>Visualize the correlation matrix of all numeric columns in <code>df</code> using <code>corrplot()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.92 loaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>correlatoin_matrix <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">keep</span>(is.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(correlatoin_matrix, <span class="at">type =</span> <span class="st">"upper"</span>, <span class="at">method =</span> <span class="st">"circle"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Homework_3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-11" class="level6">
+<h6 class="anchored" data-anchor-id="points-11">2.4 (5 points)</h6>
+<p>Compute the variance inflation factor (VIF) for each predictor in the full model using <code>vif()</code> function. What can we conclude from this?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#vif_values &lt;- vif(df) # Insert your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br><br><br><br> <br><br><br><br> —</p>
+</section>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+40 points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Variable selection</p>
+</div>
+</div>
+<hr>
+<section id="points-13" class="level6">
+<h6 class="anchored" data-anchor-id="points-13">3.1 (5 points)</h6>
+<p>Run a backward stepwise regression using a <code>full_model</code> object as the starting model. Store the final formula in an object called <code>backward_formula</code> using the built-in <code>formula()</code> function in R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> ., df)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>backward_formula <span class="ot">&lt;-</span> <span class="fu">step</span>(full_model, <span class="at">direction =</span> <span class="st">"backward"</span>, <span class="at">scope=</span><span class="fu">formula</span>(full_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-3953.43
+quality ~ volatile.acidity + citric.acid + residual.sugar + chlorides + 
+    total.sulfur.dioxide + density + pH + sulphates + alcohol + 
+    type
+
+                       Df Sum of Sq    RSS     AIC
+- citric.acid           1     0.066 3523.6 -3955.3
+- total.sulfur.dioxide  1     0.854 3524.4 -3953.9
+&lt;none&gt;                              3523.5 -3953.4
+- pH                    1     4.413 3527.9 -3947.3
+- chlorides             1     4.559 3528.1 -3947.0
+- density               1    19.054 3542.6 -3920.4
+- type                  1    26.794 3550.3 -3906.2
+- sulphates             1    41.399 3564.9 -3879.5
+- residual.sugar        1    63.881 3587.4 -3838.7
+- alcohol               1   206.860 3730.4 -3584.8
+- volatile.acidity      1   216.549 3740.0 -3567.9
+
+Step:  AIC=-3955.3
+quality ~ volatile.acidity + residual.sugar + chlorides + total.sulfur.dioxide + 
+    density + pH + sulphates + alcohol + type
+
+                       Df Sum of Sq    RSS     AIC
+- total.sulfur.dioxide  1     0.818 3524.4 -3955.8
+&lt;none&gt;                              3523.6 -3955.3
+- chlorides             1     4.495 3528.1 -3949.0
+- pH                    1     4.536 3528.1 -3948.9
+- density               1    20.794 3544.4 -3919.1
+- type                  1    26.943 3550.5 -3907.8
+- sulphates             1    41.491 3565.1 -3881.2
+- residual.sugar        1    67.371 3590.9 -3834.3
+- alcohol               1   235.151 3758.7 -3537.6
+- volatile.acidity      1   252.565 3776.1 -3507.5
+
+Step:  AIC=-3955.8
+quality ~ volatile.acidity + residual.sugar + chlorides + density + 
+    pH + sulphates + alcohol + type
+
+                   Df Sum of Sq    RSS     AIC
+&lt;none&gt;                          3524.4 -3955.8
+- pH                1     4.295 3528.7 -3949.9
+- chlorides         1     4.523 3528.9 -3949.5
+- density           1    21.540 3545.9 -3918.2
+- sulphates         1    40.711 3565.1 -3883.2
+- type              1    43.664 3568.0 -3877.8
+- residual.sugar    1    66.572 3591.0 -3836.2
+- alcohol           1   244.545 3768.9 -3521.9
+- volatile.acidity  1   256.695 3781.1 -3501.0</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-14" class="level6">
+<h6 class="anchored" data-anchor-id="points-14">3.2 (5 points)</h6>
+<p>Run a forward stepwise regression using a <code>null_model</code> object as the starting model. Store the final formula in an object called <code>forward_formula</code> using the built-in <code>formula()</code> function in R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(quality <span class="sc">~</span> <span class="dv">1</span>, df)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>forward_formula <span class="ot">&lt;-</span> <span class="fu">step</span>(null_model, <span class="at">direction =</span> <span class="st">"forward"</span>, <span class="at">scope =</span> <span class="fu">formula</span>(full_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-1760.04
+quality ~ 1
+
+                       Df Sum of Sq    RSS     AIC
++ alcohol               1    977.95 3975.7 -3186.9
++ density               1    463.41 4490.3 -2396.2
++ volatile.acidity      1    349.71 4604.0 -2233.7
++ chlorides             1    199.47 4754.2 -2025.1
++ type                  1     70.53 4883.2 -1851.2
++ citric.acid           1     36.24 4917.4 -1805.7
++ total.sulfur.dioxide  1      8.48 4945.2 -1769.2
++ sulphates             1      7.34 4946.3 -1767.7
++ residual.sugar        1      6.77 4946.9 -1766.9
++ pH                    1      1.88 4951.8 -1760.5
+&lt;none&gt;                              4953.7 -1760.0
+
+Step:  AIC=-3186.88
+quality ~ alcohol
+
+                       Df Sum of Sq    RSS     AIC
++ volatile.acidity      1   307.508 3668.2 -3707.9
++ residual.sugar        1    85.662 3890.1 -3326.4
++ type                  1    54.335 3921.4 -3274.3
++ citric.acid           1    40.303 3935.4 -3251.1
++ chlorides             1    39.696 3936.0 -3250.1
++ total.sulfur.dioxide  1    31.346 3944.4 -3236.3
++ sulphates             1     7.859 3967.9 -3197.7
++ pH                    1     5.938 3969.8 -3194.6
+&lt;none&gt;                              3975.7 -3186.9
++ density               1     0.005 3975.7 -3184.9
+
+Step:  AIC=-3707.89
+quality ~ alcohol + volatile.acidity
+
+                       Df Sum of Sq    RSS     AIC
++ sulphates             1    48.259 3620.0 -3791.9
++ density               1    38.704 3629.5 -3774.8
++ residual.sugar        1    29.751 3638.5 -3758.8
++ type                  1    28.895 3639.3 -3757.3
++ total.sulfur.dioxide  1     5.619 3662.6 -3715.9
++ pH                    1     5.533 3662.7 -3715.7
+&lt;none&gt;                              3668.2 -3707.9
++ chlorides             1     0.162 3668.1 -3706.2
++ citric.acid           1     0.099 3668.1 -3706.1
+
+Step:  AIC=-3791.94
+quality ~ alcohol + volatile.acidity + sulphates
+
+                       Df Sum of Sq    RSS     AIC
++ residual.sugar        1    43.989 3576.0 -3869.4
++ density               1    18.661 3601.3 -3823.5
++ type                  1     6.012 3614.0 -3800.7
++ chlorides             1     4.988 3615.0 -3798.9
++ citric.acid           1     2.031 3617.9 -3793.6
++ pH                    1     1.903 3618.1 -3793.4
+&lt;none&gt;                              3620.0 -3791.9
++ total.sulfur.dioxide  1     0.817 3619.2 -3791.4
+
+Step:  AIC=-3869.37
+quality ~ alcohol + volatile.acidity + sulphates + residual.sugar
+
+                       Df Sum of Sq    RSS     AIC
++ type                  1   20.7581 3555.2 -3905.2
++ total.sulfur.dioxide  1   13.3542 3562.6 -3891.7
++ pH                    1    6.6430 3569.3 -3879.5
++ citric.acid           1    4.3384 3571.6 -3875.3
++ chlorides             1    1.8907 3574.1 -3870.8
+&lt;none&gt;                              3576.0 -3869.4
++ density               1    0.0071 3576.0 -3867.4
+
+Step:  AIC=-3905.19
+quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + 
+    type
+
+                       Df Sum of Sq    RSS     AIC
++ density               1   20.4623 3534.8 -3940.7
++ chlorides             1    6.6602 3548.6 -3915.4
++ citric.acid           1    5.2242 3550.0 -3912.7
++ pH                    1    3.9477 3551.3 -3910.4
++ total.sulfur.dioxide  1    1.2539 3554.0 -3905.5
+&lt;none&gt;                              3555.2 -3905.2
+
+Step:  AIC=-3940.7
+quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + 
+    type + density
+
+                       Df Sum of Sq    RSS     AIC
++ chlorides             1    6.0826 3528.7 -3949.9
++ pH                    1    5.8541 3528.9 -3949.5
+&lt;none&gt;                              3534.8 -3940.7
++ citric.acid           1    0.8471 3533.9 -3940.3
++ total.sulfur.dioxide  1    0.5646 3534.2 -3939.7
+
+Step:  AIC=-3949.89
+quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + 
+    type + density + chlorides
+
+                       Df Sum of Sq    RSS     AIC
++ pH                    1    4.2945 3524.4 -3955.8
+&lt;none&gt;                              3528.7 -3949.9
++ total.sulfur.dioxide  1    0.5765 3528.1 -3948.9
++ citric.acid           1    0.2338 3528.4 -3948.3
+
+Step:  AIC=-3955.8
+quality ~ alcohol + volatile.acidity + sulphates + residual.sugar + 
+    type + density + chlorides + pH
+
+                       Df Sum of Sq    RSS     AIC
+&lt;none&gt;                              3524.4 -3955.8
++ total.sulfur.dioxide  1   0.81762 3523.6 -3955.3
++ citric.acid           1   0.02919 3524.4 -3953.9</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-15" class="level6">
+<h6 class="anchored" data-anchor-id="points-15">3.3 (10 points)</h6>
+<ol type="1">
+<li><p>Create a <code>y</code> vector that contains the response variable (<code>quality</code>) from the <code>df</code> dataframe.</p></li>
+<li><p>Create a design matrix <code>X</code> for the <code>full_model</code> object using the <code>make_model_matrix()</code> function provided in the Appendix.</p></li>
+<li><p>Then, use the <code>cv.glmnet()</code> function to perform LASSO and Ridge regression with <code>X</code> and <code>y</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df<span class="sc">$</span>quality</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>make_model_matrix <span class="ot">&lt;-</span> <span class="cf">function</span>(formula){</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(full_model, df)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X)){</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span>cnames[i] <span class="sc">==</span> <span class="st">"typewhite"</span>){</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>      X[, i] <span class="ot">&lt;-</span> <span class="fu">scale</span>(X[, i])</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">colnames</span>(X)[i] <span class="ot">&lt;-</span> <span class="st">"type"</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(X)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>cv_ridge <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="fu">make_model_matrix</span>(forward_formula), y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>cv_lasso <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="fu">make_model_matrix</span>(forward_formula), y, <span class="at">alpha =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create side-by-side plots of the ridge and LASSO regression results. Interpret your main findings.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv_ridge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Homework_3_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv_lasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Homework_3_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-16" class="level6">
+<h6 class="anchored" data-anchor-id="points-16">3.4 (5 points)</h6>
+<p>Print the coefficient values for LASSO regression at the <code>lambda.1se</code> value? What are the variables selected by LASSO?</p>
+<p>Store the variable names with non-zero coefficients in <code>lasso_vars</code>, and create a formula object called <code>lasso_formula</code> using the <code>make_formula()</code> function provided in the Appendix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>lasso_coefficient <span class="ot">&lt;-</span> <span class="fu">coef</span>(cv_lasso, <span class="at">s =</span> <span class="st">"lambda.1se"</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>lasso_coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>11 x 1 sparse Matrix of class "dgCMatrix"
+                              s1
+(Intercept)           5.81837771
+volatile.acidity     -0.19397623
+citric.acid           .         
+residual.sugar        0.04407054
+chlorides             .         
+total.sulfur.dioxide  .         
+density               .         
+pH                    .         
+sulphates             0.05807551
+alcohol               0.36804141
+type                  .         </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lasso_vars <span class="ot">&lt;-</span> <span class="fu">rownames</span>(lasso_coefficient)[<span class="fu">which</span>((lasso_coefficient) <span class="sc">&gt;</span> <span class="dv">0</span>)]</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>lasso_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "(Intercept)"    "residual.sugar" "sulphates"      "alcohol"       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>make_formula <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"quality ~ "</span>, <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">" + "</span>))</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>lasso_formula <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(lasso_vars)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>lasso_formula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quality ~ (Intercept) + residual.sugar + sulphates + alcohol
+&lt;environment: 0x000000002673a888&gt;</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-17" class="level6">
+<h6 class="anchored" data-anchor-id="points-17">3.5 (5 points)</h6>
+<p>Print the coefficient values for ridge regression at the <code>lambda.1se</code> value? What are the variables selected here?</p>
+<p>Store the variable names with non-zero coefficients in <code>ridge_vars</code>, and create a formula object called <code>ridge_formula</code> using the <code>make_formula()</code> function provided in the Appendix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>ridge_coefficient <span class="ot">&lt;-</span> <span class="fu">coef</span>(cv_ridge, <span class="at">s =</span> <span class="st">"lambda.1se"</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>ridge_coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>11 x 1 sparse Matrix of class "dgCMatrix"
+                              s1
+(Intercept)           5.80682329
+volatile.acidity     -0.15973580
+citric.acid           0.02257425
+residual.sugar        0.08380886
+chlorides            -0.04784706
+total.sulfur.dioxide -0.03904363
+density              -0.08260927
+pH                    0.02328926
+sulphates             0.07617805
+alcohol               0.25202469
+type                  0.04694751</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ridge_vars <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ridge_coefficient)[<span class="fu">which</span>((ridge_coefficient) <span class="sc">&gt;</span> <span class="dv">0</span>)]</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>ridge_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "(Intercept)"    "citric.acid"    "residual.sugar" "pH"            
+[5] "sulphates"      "alcohol"        "type"          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>make_formula <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"quality ~ "</span>, <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">" + "</span>))</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>ridge_formula <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(ridge_vars)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>ridge_formula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quality ~ (Intercept) + citric.acid + residual.sugar + pH + sulphates + 
+    alcohol + type
+&lt;environment: 0x0000000025120478&gt;</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-18" class="level6">
+<h6 class="anchored" data-anchor-id="points-18">3.6 (10 points)</h6>
+<p>What is the difference between stepwise selection, LASSO and ridge based on you analyses above?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Stepwise uses 8 variables"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stepwise uses 8 variables"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Lasso uses 5 variables, not including the intercept"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Lasso uses 5 variables, not including the intercept"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ridge uses 6 variables, not including the intercept"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ridge uses 6 variables, not including the intercept"</code></pre>
+</div>
+</div>
+<p><br><br><br><br> <br><br><br><br> —</p>
+</section>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+70 points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Variable selection</p>
+</div>
+</div>
+<hr>
+<section id="points-20" class="level6">
+<h6 class="anchored" data-anchor-id="points-20">4.1 (5 points)</h6>
+<p>Excluding <code>quality</code> from <code>df</code> we have <span class="math inline">\(10\)</span> possible predictors as the covariates. How many different models can we create using any subset of these <span class="math inline">\(10\)</span> coavriates as possible predictors? Justify your answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="st">"The number of different models we can create using any subset of n covariates is 2^n since for each of the n covariates, we have two possible choices (either to include or exclude that covariate from the model)."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The number of different models we can create using any subset of n covariates is 2^n since for each of the n covariates, we have two possible choices (either to include or exclude that covariate from the model)."</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="st">"In this case, we have n = 10 covariates, so the total number of different models we can create is 2^{10} = 1024. Therefore, we can create $1024$ different models using any subset of these $10$ covariates as possible predictors."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "In this case, we have n = 10 covariates, so the total number of different models we can create is 2^{10} = 1024. Therefore, we can create $1024$ different models using any subset of these $10$ covariates as possible predictors."</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="points-21" class="level6">
+<h6 class="anchored" data-anchor-id="points-21">4.2 (20 points)</h6>
+<p>Store the names of the predictor variables (all columns except <code>quality</code>) in an object called <code>x_vars</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>x_vars <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>quality))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use:</p>
+<ul>
+<li>the <code>combn()</code> function (built-in R function) and</li>
+<li>the <code>make_formula()</code> (provided in the Appendix)</li>
+</ul>
+<p>to <strong>generate all possible linear regression formulas</strong> using the variables in <code>x_vars</code>. This is most optimally achieved using the <code>map()</code> function from the <code>purrr</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>make_formula <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"quality ~ "</span>, <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">" + "</span>))</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">map</span>(</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x_vars),</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x){</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>    vars <span class="ot">&lt;-</span> <span class="fu">combn</span>(x_vars, x, <span class="at">simplify =</span> <span class="cn">FALSE</span>) <span class="co"># Insert code here</span></span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(vars, make_formula) <span class="co"># Insert code here</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If your code is right the following command should return something along the lines of:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(formulas, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "quality ~ volatile.acidity + residual.sugar + density + sulphates + type"                
+[2] "quality ~ density + pH + sulphates + type"                                               
+[3] "quality ~ citric.acid + chlorides + total.sulfur.dioxide + density + pH"                 
+[4] "quality ~ residual.sugar + chlorides + total.sulfur.dioxide + sulphates + alcohol + type"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "quality ~ volatile_acidity + residual_sugar + density + pH + alcohol"                                                 </span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [2] "quality ~ citric_acid"                                                                                                </span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [3] "quality ~ volatile_acidity + citric_acid + residual_sugar + total_sulfur_dioxide + density + pH + sulphates + alcohol"</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [4] "quality ~ citric_acid + chlorides + total_sulfur_dioxide + pH + alcohol + type"  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="points-22" class="level6">
+<h6 class="anchored" data-anchor-id="points-22">4.3 (10 points)</h6>
+<p>Use <code>map()</code> and <code>lm()</code> to fit a linear regression model to each formula in <code>formulas</code>, using <code>df</code> as the data source. Use <code>broom::glance()</code> to extract the model summary statistics, and bind them together into a single tibble of summaries using the <code>bind_rows()</code> function from <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">map</span>(formulas,<span class="sc">~</span><span class="fu">lm</span>((<span class="sc">-</span>quality) <span class="sc">~</span> ., <span class="at">data=</span>df)) <span class="co"># Insert your code here</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>summaries <span class="ot">&lt;-</span> <span class="fu">map</span>(models,broom<span class="sc">::</span>glance) <span class="co"># Insert your code here</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>summaries_tibble <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(summaries, <span class="at">.id=</span><span class="st">"formula"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="points-23" class="level6">
+<h6 class="anchored" data-anchor-id="points-23">4.4 (5 points)</h6>
+<p>Extract the <code>adj.r.squared</code> values from <code>summaries</code> and use them to identify the formula with the <strong><em>highest</em></strong> adjusted R-squared value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>R_squared <span class="ot">&lt;-</span> summaries<span class="sc">$</span>adj.r.squared</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>max_adj_index <span class="ot">&lt;-</span> <span class="fu">which.max</span>(R_squared)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>r_form <span class="ot">&lt;-</span> formulas[max_adj_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Store resulting formula as a variable called <code>rsq_formula</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rsq_formula &lt;- ... #insert code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="points-24" class="level6">
+<h6 class="anchored" data-anchor-id="points-24">4.5 (5 points)</h6>
+<p>Extract the <code>AIC</code> values from <code>summaries</code> and use them to identify the formula with the <strong><em>lowest</em></strong> AIC value.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>... <span class="co"># Insert your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Store resulting formula as a variable called <code>aic_formula</code>.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>aic_formula <span class="ot">&lt;-</span> ... <span class="co"># Insert your code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="points-25" class="level6">
+<h6 class="anchored" data-anchor-id="points-25">4.6 (15 points)</h6>
+<p>Combine all formulas shortlisted into a single vector called <code>final_formulas</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>null_formula <span class="ot">&lt;-</span> <span class="fu">formula</span>(null_model)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>full_formula <span class="ot">&lt;-</span> <span class="fu">formula</span>(full_model)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>final_formulas <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>  null_formula,</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  full_formula,</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  backward_formula,</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>  forward_formula,</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  lasso_formula, </span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>  ridge_formula</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rsq_formula,</span></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#aic_formula</span></span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Are <code>aic_formula</code> and <code>rsq_formula</code> the same? How do they differ from the formulas shortlisted in question 3?</p></li>
+<li><p>Which of these is more reliable? Why?</p></li>
+<li><p>If we had a dataset with <span class="math inline">\(10,000\)</span> columns, which of these methods would you consider for your analyses? Why?</p></li>
+</ul>
+<hr>
+</section>
+<section id="points-26" class="level6">
+<h6 class="anchored" data-anchor-id="points-26">4.7 (10 points)</h6>
+<p>Use <code>map()</code> and <code>glance()</code> to extract the <code>sigma, adj.r.squared, AIC, df</code>, and <code>p.value</code> statistics for each model obtained from <code>final_formulas</code>. Bind them together into a single data frame <code>summary_table</code>. Summarize your main findings.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">map</span>(</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  final_formulas, </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) ... <span class="co"># Insert your code here</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>summary_table <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="hidden" data-unless-format="pdf">
+<div style="page-break-after: always;"></div>
+</div>
+<p><br><br><br><br> <br><br><br><br> —</p>
+</section>
+</section>
+<section id="appendix" class="level1">
+<h1>Appendix</h1>
+<section id="convenience-function-for-creating-a-formula-object" class="level4">
+<h4 class="anchored" data-anchor-id="convenience-function-for-creating-a-formula-object">Convenience function for creating a formula object</h4>
+<p>The following function which takes as input a vector of column names <code>x</code> and outputs a <code>formula</code> object with <code>quality</code> as the response variable and the columns of <code>x</code> as the covariates.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>make_formula <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"quality ~ "</span>, <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">" + "</span>))</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For example the following code will</span></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="co"># result in a formula object</span></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="co"># "quality ~ a + b + c"</span></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">make_formula</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="convenience-function-for-glmnet" class="level4">
+<h4 class="anchored" data-anchor-id="convenience-function-for-glmnet">Convenience function for <code>glmnet</code></h4>
+<p>The <code>make_model_matrix</code> function below takes a <code>formula</code> as input and outputs a <strong>rescaled</strong> model matrix <code>X</code> in a format amenable for <code>glmnet()</code></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>make_model_matrix <span class="ot">&lt;-</span> <span class="cf">function</span>(formula){</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(formula, df)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X)){</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span>cnames[i] <span class="sc">==</span> <span class="st">"typewhite"</span>){</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>      X[, i] <span class="ot">&lt;-</span> <span class="fu">scale</span>(X[, i])</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">colnames</span>(X)[i] <span class="ot">&lt;-</span> <span class="st">"type"</span></span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(X)</span>
+<span id="cb82-12"><a href="#cb82-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Session Information
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Print your <code>R</code> session information using the following command</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19044)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+[1] corrplot_0.92 glmnet_4.1-4  Matrix_1.4-1  purrr_0.3.4   dplyr_1.0.8  
+[6] tidyr_1.2.0   readr_2.1.2  
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.8.3     pillar_1.8.1     compiler_4.0.3   iterators_1.0.14
+ [5] tools_4.0.3      digest_0.6.29    jsonlite_1.8.0   evaluate_0.20   
+ [9] lifecycle_1.0.1  tibble_3.1.6     lattice_0.20-45  pkgconfig_2.0.3 
+[13] rlang_1.0.2      foreach_1.5.2    cli_3.2.0        rstudioapi_0.14 
+[17] yaml_2.3.5       xfun_0.20        stringr_1.4.0    knitr_1.30      
+[21] generics_0.1.0   vctrs_0.4.1      hms_1.1.2        grid_4.0.3      
+[25] tidyselect_1.1.2 glue_1.6.2       R6_2.5.1         fansi_0.4.2     
+[29] survival_3.2-7   rmarkdown_2.6    tzdb_0.3.0       magrittr_2.0.3  
+[33] backports_1.4.1  splines_4.0.3    codetools_0.2-16 ellipsis_0.3.2  
+[37] htmltools_0.5.1  shape_1.4.6      renv_0.16.0      utf8_1.1.4      
+[41] stringi_1.7.6    broom_1.0.3     </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
