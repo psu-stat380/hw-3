@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Insert your name here">
+<meta name="author" content="Lekh Shetty">
 
 <title>Homework 3</title>
 <style>
@@ -117,7 +117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p><span style="background-color: yellow;">Insert your name here</span> </p>
+               <p><span style="background-color: yellow;">Lekh Shetty</span> </p>
             </div>
     </div>
       
@@ -725,25 +725,26 @@ quality ~ alcohol + volatile.acidity + sulphates + residual.sugar +
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>lasso_coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>11 x 1 sparse Matrix of class "dgCMatrix"
-                              s1
-(Intercept)           5.81837771
-volatile.acidity     -0.19397623
-citric.acid           .         
-residual.sugar        0.04407054
-chlorides             .         
-total.sulfur.dioxide  .         
-density               .         
-pH                    .         
-sulphates             0.05807551
-alcohol               0.36804141
-type                  .         </code></pre>
+                               s1
+(Intercept)           5.806762929
+volatile.acidity     -0.219524452
+citric.acid           .          
+residual.sugar        0.073530992
+chlorides            -0.010187204
+total.sulfur.dioxide -0.012378985
+density               .          
+pH                    0.008425762
+sulphates             0.070806384
+alcohol               0.383710394
+type                  0.047192777</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lasso_vars <span class="ot">&lt;-</span> <span class="fu">rownames</span>(lasso_coefficient)[<span class="fu">which</span>((lasso_coefficient) <span class="sc">&gt;</span> <span class="dv">0</span>)]</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>lasso_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "(Intercept)"    "residual.sugar" "sulphates"      "alcohol"       </code></pre>
+<pre><code>[1] "(Intercept)"    "residual.sugar" "pH"             "sulphates"     
+[5] "alcohol"        "type"          </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>make_formula <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(</span>
@@ -754,8 +755,9 @@ type                  .         </code></pre>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>lasso_formula <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(lasso_vars)</span>
 <span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>lasso_formula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>quality ~ (Intercept) + residual.sugar + sulphates + alcohol
-&lt;environment: 0x000000002673a888&gt;</code></pre>
+<pre><code>quality ~ (Intercept) + residual.sugar + pH + sulphates + alcohol + 
+    type
+&lt;environment: 0x0000000026ee79a8&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -770,17 +772,17 @@ type                  .         </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>11 x 1 sparse Matrix of class "dgCMatrix"
                               s1
-(Intercept)           5.80682329
-volatile.acidity     -0.15973580
-citric.acid           0.02257425
-residual.sugar        0.08380886
-chlorides            -0.04784706
-total.sulfur.dioxide -0.03904363
-density              -0.08260927
-pH                    0.02328926
-sulphates             0.07617805
-alcohol               0.25202469
-type                  0.04694751</code></pre>
+(Intercept)           5.80089059
+volatile.acidity     -0.17446628
+citric.acid           0.02004480
+residual.sugar        0.09802567
+chlorides            -0.04652076
+total.sulfur.dioxide -0.04017299
+density              -0.08552175
+pH                    0.02467471
+sulphates             0.08151270
+alcohol               0.26980588
+type                  0.07105307</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -801,7 +803,7 @@ type                  0.04694751</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>quality ~ (Intercept) + citric.acid + residual.sugar + pH + sulphates + 
     alcohol + type
-&lt;environment: 0x0000000025120478&gt;</code></pre>
+&lt;environment: 0x00000000258cd448&gt;</code></pre>
 </div>
 </div>
 <hr>
@@ -888,10 +890,10 @@ type                  0.04694751</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(formulas, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "quality ~ volatile.acidity + residual.sugar + density + sulphates + type"                
-[2] "quality ~ density + pH + sulphates + type"                                               
-[3] "quality ~ citric.acid + chlorides + total.sulfur.dioxide + density + pH"                 
-[4] "quality ~ residual.sugar + chlorides + total.sulfur.dioxide + sulphates + alcohol + type"</code></pre>
+<pre><code>[1] "quality ~ volatile.acidity + chlorides + pH"                                                 
+[2] "quality ~ volatile.acidity + citric.acid + residual.sugar + total.sulfur.dioxide + type"     
+[3] "quality ~ volatile.acidity + citric.acid + chlorides + total.sulfur.dioxide + density + type"
+[4] "quality ~ citric.acid + residual.sugar + pH + type"                                          </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "quality ~ volatile_acidity + residual_sugar + density + pH + alcohol"                                                 </span></span>
